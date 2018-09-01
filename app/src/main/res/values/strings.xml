@@ -4,13 +4,11 @@
     <string name="aviso">Aviso</string>
     <string name="iniciar">Iniciar</string>
     <string name="botao_parar">Parar</string>
-    <string name="ativar_headset_bluetooth">Ativar Headset Bluetooth</string>
     <string name="frequencia">Frequência</string>
     <string name="delay">Atraso</string>
     <string name="ok">OK</string>
     <string name="confirmacao">Confirmação</string>
     <string name="nao">Não</string>
-    <string name="desativar_notificacoes">Desativar Notificações</string>
     <string name="preferencias">Configurar Modos</string>
     <string name="desenvolvedores">Desenvolvedor</string>
     <string name="jefferson">Jefferson de França Filho - RA: 1429426 - Bacharelado em Engenharia de Software - Universidade Tecnológica Federal do Paraná - UTFPR .</string>
@@ -35,10 +33,14 @@
     <string name="falha_modo">Falha ao salvar modo.</string>
     <string name="salvo_sucesso_modo">Novo modo salvo com sucesso.</string>
     <string name="salvo_falha_modo">Modo não foi salvo.</string>
+    <string name="texto_botao_iniciar_gravacao">Iniciar Gravação</string>
+    <string name="texto_botao_iniciar_reproducao">Iniciar Reprodução</string>
+    <string name="texto_botao_parar_gravacao">Parar Gravação</string>
+    <string name="texto_botao_parar_reproducao">Parar Reprodução</string>
+    <string name="texto_add_modo">Adicione um modo</string>
+    <string name="texto_modos">Modos:</string>
 
     <string-array name="itens_spiner">
-        <item>Nenhum Modo Selecionado</item>
-        <item>Modo Casa</item>
-        <item>Modo Apresentação</item>
+        <item>Nenhum modo selecionado</item>
     </string-array>
 </resources>

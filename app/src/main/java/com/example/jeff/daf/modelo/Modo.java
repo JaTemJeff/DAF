@@ -22,12 +22,6 @@ public class Modo {
     @DatabaseField
     private int delay_modo;
 
-    @DatabaseField
-    private boolean bluetooth_modo;
-
-    @DatabaseField
-    private  boolean notificacao_modo;
-
     public int getId_modo() {
         return id_modo;
     }
@@ -60,21 +54,6 @@ public class Modo {
         this.delay_modo = delay_modo;
     }
 
-    public boolean isBluetooth_modo() {
-        return bluetooth_modo;
-    }
-
-    public void setBluetooth_modo(boolean bluetooth_modo) {
-        this.bluetooth_modo = bluetooth_modo;
-    }
-
-    public boolean isNotificacao_modo() {
-        return notificacao_modo;
-    }
-
-    public void setNotificacao_modo(boolean notificacao_modo) {
-        this.notificacao_modo = notificacao_modo;
-    }
     @Override
     public String toString(){
         return getNome_modo();

@@ -1,20 +1,12 @@
 package com.example.jeff.daf;
-
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.SQLException;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.media.MediaPlayer;
-import android.media.MediaRecorder;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,166 +16,79 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.example.jeff.daf.database.ModoDAO;
+import com.example.jeff.daf.modelo.Modo;
 import com.example.jeff.daf.persistencia.DatabaseHelper;
 import com.example.jeff.daf.persistencia.DatabaseManager;
-import com.example.jeff.daf.modelo.Modo;
 import com.example.jeff.daf.utils.UtilsGUI;
+import com.github.piasy.audioprocessor.AudioProcessor;
+import com.github.piasy.rxandroidaudio.StreamAudioPlayer;
+import com.github.piasy.rxandroidaudio.StreamAudioRecorder;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
+
+import static android.Manifest.permission.RECORD_AUDIO;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button botaoIniciar;
+    Button botaoParar;
+    SeekBar seekbarFrequencia;
+    SeekBar seekbarDelay;
+    private RxPermissions mPermissions;
     private ArrayAdapter<Modo> listaAdapter;
-    private Button botaoIniciar;
-    private Button botaoParar;
     private Button botaoNovoModo;
     private AlertDialog.Builder confirmaSalvarModorDialog;
-    private SeekBar seekbarFrequencia;
-    private SeekBar seekbarDelay;
     private TextView exibeDelay;
     private TextView exibeFrequencia;
-    private Switch switchativarbluetooth;
-    private CheckBox checkboxnotificacao;
     private Spinner selecionaModo;
-    private String idModo;
-    /*
-    private EditText nomeModo;
-    private EditText inputFrequencia;
-    private EditText inputDelay;*/
-
-    private static final String ARQUIVO_PREFERENCIA = "ArqPreferencia";
-
-    //Gravacao de audio
-    private static final String LOG_TAG = "AudioRecordTest";
-    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
-    private static String mFileName = null;
-
-    //private RecordButton mRecordButton = null;
-    private MediaRecorder mRecorder = null;
-
-    //private PlayButton   mPlayButton = null;
-    private MediaPlayer   mPlayer = null;
-
-    // Requesting permission to RECORD_AUDIO
-    private boolean permissionToRecordAccepted = false;
-    private String [] permissions = {Manifest.permission.RECORD_AUDIO};
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
-            case REQUEST_RECORD_AUDIO_PERMISSION:
-                permissionToRecordAccepted  = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                break;
-        }
-        if (!permissionToRecordAccepted ) finish();
-
-    }
-
-    private void onRecord(boolean start) {
-        if (start) {
-            startRecording();
-        } else {
-            stopRecording();
-        }
-    }
-
-    private void onPlay(boolean start) {
-        if (start) {
-            startPlaying();
-        } else {
-            stopPlaying();
-        }
-    }
-
-    private void startPlaying() {
-        mPlayer = new MediaPlayer();
-        try {
-            mPlayer.setDataSource(mFileName);
-            mPlayer.prepare();
-            mPlayer.start();
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
-        }
-    }
-
-    private void stopPlaying() {
-        mPlayer.release();
-        mPlayer = null;
-    }
-
-    private void startRecording() {
-        mRecorder = new MediaRecorder();
-        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mRecorder.setOutputFile(mFileName);
-        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-
-        try {
-            mRecorder.prepare();
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
-        }
-
-        mRecorder.start();
-    }
-
-    private void stopRecording() {
-        mRecorder.stop();
-        mRecorder.release();
-        mRecorder = null;
-    }
-
-
+    private StreamAudioRecorder mStreamAudioRecorder;
+    private StreamAudioPlayer mStreamAudioPlayer;
+    private AudioProcessor mAudioProcessor;
+    private FileOutputStream mFileOutputStream;
+    private File mOutputFile;
+    private byte[] mBuffer;
+    private boolean mIsRecording = false;
+    private float mRatio = 1;
+    static final int BUFFER_SIZE = 2048;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
-
         DatabaseManager.init(this);
-        ModoDAO dao = null;
-        dao = new ModoDAO(this);
-
-        mFileName = getExternalCacheDir().getAbsolutePath();
-        mFileName += "/audiorecordtest.3gp";
-
 
         //Texto de Exibição dos Seekbar's
         seekbarFrequencia = findViewById(R.id.seekbar_frequencia_id);
         seekbarDelay = findViewById(R.id.seekbar_delay_id);
         exibeDelay = findViewById(R.id.textview_exibe_delay_id);
         exibeFrequencia = findViewById(R.id.textview_exibe_frequencia_id);
-        switchativarbluetooth = findViewById(R.id.switch_headset_bluetooh_id);
-        checkboxnotificacao = findViewById(R.id.checkbox_notificacao_id);
-
 
         seekbarDelay.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 exibeDelay.setText(i + " Ms");
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
@@ -192,38 +97,24 @@ public class MainActivity extends AppCompatActivity {
 
         seekbarFrequencia.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                exibeFrequencia.setText(i + " Mhz");
+            public void onProgressChanged(SeekBar seekBar, int progresso, boolean b) {
+                mRatio = (float) progresso / 10;
+                exibeFrequencia.setText(String.valueOf(mRatio+"Mhz"));
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
         });
 
-
         //Itens do spinner
         selecionaModo = findViewById(R.id.spinner_id);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.itens_spiner, android.R.layout.simple_spinner_item);
         selecionaModo.setAdapter(adapter);
-
-        /*
-        final Modo modocasa = new Modo();
-        modocasa.setNome_modo("Modo Casa");
-        modocasa.setFrequencia_modo(5);
-        modocasa.setDelay_modo(2);
-        modocasa.setBluetooth_modo(false);
-        modocasa.setNotificacao_modo(true);
-        if(dao.findById(modocasa.getId_modo()).toString() == null){
-            dao.create(modocasa);
-        }*/
-
         popularListaSpiner();
 
         final EditText nomeModo = new EditText(MainActivity.this);
@@ -238,22 +129,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(final View view)  {
                 confirmaSalvarModorDialog = new AlertDialog.Builder(MainActivity.this);
                 confirmaSalvarModorDialog.setTitle(R.string.criar_modo);
-
-                /*confirmaSalvarModorDialog.setMessage("Digite o nome do modo");
-                confirmaSalvarModorDialog.setCancelable(false);
-                nomeModo.setText("Digite o nome do modo");
-                inputDelay.setText(getText(seekbarDelay.getProgress()).toString());
-                inputFrequencia.setText(getText(seekbarFrequencia.getProgress()).toString());*/
-
                 confirmaSalvarModorDialog.setMessage(R.string.nome_do_modo);
                 nomeModo.setText("");
                 if(nomeModo.getParent()!=null)
                     ((ViewGroup)nomeModo.getParent()).removeView(nomeModo); // <- fix
                 confirmaSalvarModorDialog.setView(nomeModo);
-
-                /*confirmaSalvarModorDialog.setView(inputDelay);
-                confirmaSalvarModorDialog.setView(inputFrequencia);*/
-
                 confirmaSalvarModorDialog.setIcon(android.R.drawable.ic_input_add);
                 confirmaSalvarModorDialog.setPositiveButton(R.string.salvar_modo, new DialogInterface.OnClickListener() {
                     @Override
@@ -263,8 +143,6 @@ public class MainActivity extends AppCompatActivity {
                         novoModo.setNome_modo(nomeModo.getText().toString());
                         novoModo.setFrequencia_modo(seekbarFrequencia.getProgress());
                         novoModo.setDelay_modo(seekbarDelay.getProgress());
-                        novoModo.setNotificacao_modo(checkboxnotificacao.isChecked());
-                        novoModo.setBluetooth_modo(switchativarbluetooth.isChecked());
                         String nome  = UtilsGUI.validaCampoTexto(MainActivity.this, nomeModo, R.string.nome_vazio);
                         if (nome == null){
                             return;
@@ -311,59 +189,38 @@ public class MainActivity extends AppCompatActivity {
                 seekbarDelay.setMax(10);
                 seekbarDelay.setProgress(modoSpiner.getDelay_modo());
                 seekbarFrequencia.setMax(0);
-                seekbarFrequencia.setMax(4);
+                seekbarFrequencia.setMax(20);
                 seekbarFrequencia.setProgress(modoSpiner.getFrequencia_modo());
-                switchativarbluetooth.setChecked(modoSpiner.isBluetooth_modo());
-                checkboxnotificacao.setChecked(modoSpiner.isNotificacao_modo());
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
+            public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
         botaoIniciar = findViewById(R.id.botao_iniciar_id);
         botaoIniciar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //boolean mStartRecording = true;
-                //boolean mStartPlaying = true;
-
-                //onRecord(mStartRecording);
-                //onPlay(mStartPlaying);
+                start();
             }
         });
-
-
 
         botaoParar = findViewById(R.id.botao_parar_id);
         botaoParar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //stopRecording();
-               // stopPlaying();
+                playChanged();
             }
-
         });
-
-
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();  // Always call the superclass method first
-        popularListaSpiner();
+        mStreamAudioRecorder = StreamAudioRecorder.getInstance();
+        mStreamAudioPlayer = StreamAudioPlayer.getInstance();
+        mAudioProcessor = new AudioProcessor(BUFFER_SIZE);
+        mBuffer = new byte[BUFFER_SIZE];
     }
 
     private void popularListaSpiner(){
-
         List<Modo> lista = null;
-
         try {
             DatabaseHelper conexao = DatabaseHelper.getInstance(this);
-
             lista = conexao.getModoDao()
                     .queryBuilder()
                     .orderBy("nome_modo", true)
@@ -378,9 +235,9 @@ public class MainActivity extends AppCompatActivity {
         listaAdapter = new ArrayAdapter<Modo>(this,
                 android.R.layout.simple_list_item_1,
                 lista);
-
         selecionaModo.setAdapter(listaAdapter);
     }
+
     //Infla Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -406,18 +263,137 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mRecorder != null) {
-            mRecorder.release();
-            mRecorder = null;
+    public void start() {
+        if (mIsRecording) {
+            stopRecord();
+            botaoIniciar.setText(R.string.texto_botao_iniciar_gravacao);
+            mIsRecording = false;
+        } else {
+            boolean isPermissionsGranted = getRxPermissions().isGranted(WRITE_EXTERNAL_STORAGE)
+                    && getRxPermissions().isGranted(RECORD_AUDIO);
+            if (!isPermissionsGranted) {
+                getRxPermissions()
+                        .request(WRITE_EXTERNAL_STORAGE, RECORD_AUDIO)
+                        .subscribe(granted -> {
+                            // not record first time to request permission
+                            if (granted) {
+                                Toast.makeText(getApplicationContext(), "Permission granted",
+                                        Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(),
+                                        "Permission not granted", Toast.LENGTH_SHORT).show();
+                            }
+                        }, Throwable::printStackTrace);
+            } else {
+                startRecord();
+                botaoIniciar.setText(R.string.texto_botao_parar_gravacao);
+                mIsRecording = true;
+            }
         }
+    }
 
-        if (mPlayer != null) {
-            mPlayer.release();
-            mPlayer = null;
+    private void startRecord() {
+        try {
+            mOutputFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
+                    File.separator + System.nanoTime() + ".stream.m4a");
+            mOutputFile.createNewFile();
+            mFileOutputStream = new FileOutputStream(mOutputFile);
+            mStreamAudioRecorder.start(new StreamAudioRecorder.AudioDataCallback() {
+                @Override
+                public void onAudioData(byte[] data, int size) {
+                    if (mFileOutputStream != null) {
+                        try {
+                            Log.d("AMP", "amp " + calcAmp(data, size));
+                            mFileOutputStream.write(data, 0, size);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onError() {
+                    botaoIniciar.post(() -> {
+                        Toast.makeText(getApplicationContext(), "Record fail",
+                                Toast.LENGTH_SHORT).show();
+                        botaoIniciar.setText(R.string.texto_botao_iniciar_gravacao);
+                        mIsRecording = false;
+                    });
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    private int calcAmp(byte[] data, int size) {
+        int amplitude = 0;
+        for (int i = 0; i + 1 < size; i += 2) {
+            short value = (short) (((data[i + 1] & 0x000000FF) << 8) + (data[i + 1] & 0x000000FF));
+            amplitude += Math.abs(value);
+        }
+        amplitude /= size / 2;
+        return amplitude / 2048;
+    }
+
+
+    private void stopRecord() {
+        mStreamAudioRecorder.stop();
+        try {
+            mFileOutputStream.close();
+            mFileOutputStream = null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void play() {
+        Observable.just(mOutputFile)
+                .subscribeOn(Schedulers.io())
+                .subscribe(file -> {
+                    try {
+                        mStreamAudioPlayer.init();
+                        FileInputStream inputStream = new FileInputStream(file);
+                        int read;
+                        while ((read = inputStream.read(mBuffer)) > 0) {
+                            mStreamAudioPlayer.play(mBuffer, read);
+                        }
+                        inputStream.close();
+                        mStreamAudioPlayer.release();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }, Throwable::printStackTrace);
+    }
+
+    public void playChanged() {
+        Observable.just(mOutputFile)
+                .subscribeOn(Schedulers.io())
+                .subscribe(file -> {
+                    try {
+                        mStreamAudioPlayer.init();
+                        FileInputStream inputStream = new FileInputStream(file);
+                        int read;
+                        while ((read = inputStream.read(mBuffer)) > 0) {
+                            mStreamAudioPlayer.play(mRatio == 1
+                                            ? mBuffer
+                                            : mAudioProcessor.process(mRatio, mBuffer,
+                                    StreamAudioRecorder.DEFAULT_SAMPLE_RATE),
+                                    read);
+                        }
+                        inputStream.close();
+                        mStreamAudioPlayer.release();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }, Throwable::printStackTrace);
+    }
+
+    private RxPermissions getRxPermissions() {
+        if (mPermissions == null) {
+            mPermissions = new RxPermissions(this);
+        }
+        return mPermissions;
     }
 }
 
