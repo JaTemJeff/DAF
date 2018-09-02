@@ -4,13 +4,11 @@
     <string name="aviso">Notice</string>
     <string name="iniciar">Start</string>
     <string name="botao_parar">Stop</string>
-    <string name="ativar_headset_bluetooth">Enable Bluetooth Headset</string>
     <string name="frequencia">Frequency</string>
     <string name="delay">Delay</string>
     <string name="ok">OK</string>
     <string name="confirmacao">Confirmation</string>
     <string name="nao">No</string>
-    <string name="desativar_notificacoes">Disable Notifications</string>
     <string name="preferencias">Configure Modes</string>
     <string name="desenvolvedores">Developer</string>
     <string name="jefferson">Jefferson de França Filho - RA: 1429426 - Bachelor of Science in Software Engineering - Federal Technological University of Paraná - UTFPR .</string>
@@ -35,6 +33,14 @@
     <string name="falha_modo">Failed to save mode.</string>
     <string name="salvo_sucesso_modo">New mode saved successfully.</string>
     <string name="salvo_falha_modo">Mode was not saved.</string>
+    <string name="texto_botao_iniciar_gravacao">Start Recording</string>
+    <string name="texto_botao_iniciar_reproducao">Start Play</string>
+    <string name="texto_botao_parar_gravacao">Stop Recording</string>
+    <string name="texto_botao_parar_reproducao">Stop Play</string>
+    <string name="texto_add_modo">Add a mode</string>
+    <string name="texto_modos">Modes:</string>
+    <string name="permicao_concedida">Permission granted</string>
+    <string name="permicao_nao_concedida">Permission not granted</string>
     <string-array name="itens_spiner">
         <item>None Selected Mode</item>
         <item>Home Mode</item>

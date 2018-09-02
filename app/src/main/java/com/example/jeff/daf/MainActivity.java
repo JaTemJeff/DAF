@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.SQLException;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -208,7 +209,8 @@ public class MainActivity extends AppCompatActivity {
         botaoParar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                playChanged();
+               //playChanged();
+                reproduz();
             }
         });
         mStreamAudioRecorder = StreamAudioRecorder.getInstance();
@@ -263,6 +265,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void reproduz(){
+        boolean aux = true;
+        playChanged();
+        if(aux){
+            botaoParar.setText(R.string.texto_botao_parar_reproducao);
+        } else {
+            botaoParar.setText(R.string.texto_botao_iniciar_reproducao);
+        }
+    }
     public void start() {
         if (mIsRecording) {
             stopRecord();
@@ -277,11 +288,11 @@ public class MainActivity extends AppCompatActivity {
                         .subscribe(granted -> {
                             // not record first time to request permission
                             if (granted) {
-                                Toast.makeText(getApplicationContext(), "Permission granted",
+                                Toast.makeText(getApplicationContext(), R.string.permicao_concedida,
                                         Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(getApplicationContext(),
-                                        "Permission not granted", Toast.LENGTH_SHORT).show();
+                                        R.string.permicao_nao_concedida, Toast.LENGTH_SHORT).show();
                             }
                         }, Throwable::printStackTrace);
             } else {

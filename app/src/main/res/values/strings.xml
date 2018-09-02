@@ -39,6 +39,8 @@
     <string name="texto_botao_parar_reproducao">Parar Reprodução</string>
     <string name="texto_add_modo">Adicione um modo</string>
     <string name="texto_modos">Modos:</string>
+    <string name="permicao_concedida">Permissão concedida</string>
+    <string name="permicao_nao_concedida">Permissão não concedida</string>
 
     <string-array name="itens_spiner">
         <item>Nenhum modo selecionado</item>
