@@ -39,6 +39,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -68,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean mIsRecording = false;
     private float mRatio = 1;
     static final int BUFFER_SIZE = 2048;
+    Timer timer = new Timer();
+    private long mAtraso = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +88,8 @@ public class MainActivity extends AppCompatActivity {
         seekbarDelay.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                exibeDelay.setText(i + " Ms");
+                mAtraso = (long) i * 100;
+                exibeDelay.setText(mAtraso + " Ms");
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -197,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
+
         botaoIniciar = findViewById(R.id.botao_iniciar_id);
         botaoIniciar.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -205,12 +211,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         botaoParar = findViewById(R.id.botao_parar_id);
         botaoParar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-               //playChanged();
-                reproduz();
+                //playChanged();
+                //reproduz();
             }
         });
         mStreamAudioRecorder = StreamAudioRecorder.getInstance();
@@ -265,15 +272,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void reproduz(){
-        boolean aux = true;
-        playChanged();
-        if(aux){
-            botaoParar.setText(R.string.texto_botao_parar_reproducao);
-        } else {
-            botaoParar.setText(R.string.texto_botao_iniciar_reproducao);
-        }
-    }
     public void start() {
         if (mIsRecording) {
             stopRecord();
@@ -299,6 +297,12 @@ public class MainActivity extends AppCompatActivity {
                 startRecord();
                 botaoIniciar.setText(R.string.texto_botao_parar_gravacao);
                 mIsRecording = true;
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        playChanged();
+                    }
+                }, mAtraso);
             }
         }
     }
@@ -358,25 +362,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void play() {
-        Observable.just(mOutputFile)
-                .subscribeOn(Schedulers.io())
-                .subscribe(file -> {
-                    try {
-                        mStreamAudioPlayer.init();
-                        FileInputStream inputStream = new FileInputStream(file);
-                        int read;
-                        while ((read = inputStream.read(mBuffer)) > 0) {
-                            mStreamAudioPlayer.play(mBuffer, read);
-                        }
-                        inputStream.close();
-                        mStreamAudioPlayer.release();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }, Throwable::printStackTrace);
-    }
-
     public void playChanged() {
         Observable.just(mOutputFile)
                 .subscribeOn(Schedulers.io())
@@ -391,6 +376,25 @@ public class MainActivity extends AppCompatActivity {
                                             : mAudioProcessor.process(mRatio, mBuffer,
                                     StreamAudioRecorder.DEFAULT_SAMPLE_RATE),
                                     read);
+                        }
+                        inputStream.close();
+                        mStreamAudioPlayer.release();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }, Throwable::printStackTrace);
+    }
+
+    public void play() {
+        Observable.just(mOutputFile)
+                .subscribeOn(Schedulers.io())
+                .subscribe(file -> {
+                    try {
+                        mStreamAudioPlayer.init();
+                        FileInputStream inputStream = new FileInputStream(file);
+                        int read;
+                        while ((read = inputStream.read(mBuffer)) > 0) {
+                            mStreamAudioPlayer.play(mBuffer, read);
                         }
                         inputStream.close();
                         mStreamAudioPlayer.release();
