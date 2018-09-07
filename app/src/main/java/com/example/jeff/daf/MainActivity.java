@@ -5,8 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.SQLException;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog.Builder confirmaSalvarModorDialog;
     private TextView exibeDelay;
     private TextView exibeFrequencia;
+    private TextView txtIniciar;
     private Spinner selecionaModo;
     private StreamAudioRecorder mStreamAudioRecorder;
     private StreamAudioPlayer mStreamAudioPlayer;
@@ -138,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 nomeModo.setText("");
                 if(nomeModo.getParent()!=null)
                     ((ViewGroup)nomeModo.getParent()).removeView(nomeModo); // <- fix
+
                 confirmaSalvarModorDialog.setView(nomeModo);
                 confirmaSalvarModorDialog.setIcon(android.R.drawable.ic_input_add);
                 confirmaSalvarModorDialog.setPositiveButton(R.string.salvar_modo, new DialogInterface.OnClickListener() {
@@ -200,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
-
+        txtIniciar = findViewById(R.id.txt_iniciar_id);
         botaoIniciar = findViewById(R.id.botao_iniciar_id);
         botaoIniciar.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -264,8 +268,8 @@ public class MainActivity extends AppCompatActivity {
     public void start() {
         if (mIsRecording) {
             stopRecord();
-            botaoIniciar.setText(R.string.texto_botao_iniciar_gravacao);
-            //botaoIniciar.setBackgroundResource(R.color.botao_normal);
+            botaoIniciar.setBackgroundResource(R.drawable.btn_iniciar_iniciar);
+            txtIniciar.setText(R.string.txt_iniciar);
             mIsRecording = false;
         } else {
             boolean isPermissionsGranted = getRxPermissions().isGranted(WRITE_EXTERNAL_STORAGE)
@@ -285,7 +289,8 @@ public class MainActivity extends AppCompatActivity {
                         }, Throwable::printStackTrace);
             } else {
                 startRecord();
-                botaoIniciar.setText(R.string.texto_botao_parar_gravacao);
+                botaoIniciar.setBackgroundResource(R.drawable.btn_iniciar_parar);
+                txtIniciar.setText(R.string.txt_parar);
                 mIsRecording = true;
                 timer.schedule(new TimerTask() {
                     @Override
@@ -321,7 +326,8 @@ public class MainActivity extends AppCompatActivity {
                     botaoIniciar.post(() -> {
                         Toast.makeText(getApplicationContext(), "Record fail",
                                 Toast.LENGTH_SHORT).show();
-                        botaoIniciar.setText(R.string.texto_botao_iniciar_gravacao);
+                        botaoIniciar.setBackgroundResource(R.drawable.btn_iniciar_iniciar);
+                        txtIniciar.setText(R.string.iniciar);
                         mIsRecording = false;
                     });
                 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DAF</string>
+    <string name="app_name">Desgaguejador</string>
     <string name="aviso">Aviso</string>
     <string name="iniciar">Iniciar</string>
     <string name="botao_parar">Parar</string>
@@ -42,6 +42,9 @@
     <string name="txt_protagonismo_estudantil">Programa Protagonismo Estudantil</string>
     <string name="txt_sobre_protagonismo_est">Tem como objetivo selecionar candidatos para bolsas de Protagonismo Estudantil, apoiadas com recursos da UTFPR, através da submissão de um projeto atinente à qualidade da vida acadêmica dos estudantes focando o ingresso, permanência e inserção na sociedade.
         \n\nO projeto Aplicativo de Auxílio ao Tratamento de Pessoas com Gagueira, foi apresentado e submetido ao EDITAL 013/2017 PROTAGONISMO ESTUDANTIL para o campus Cornélio Procópio, aprovado no segundo semestre de 2017.</string>
+    <string name="txt_iniciar">Iniciar</string>
+    <string name="txt_parar">Parar</string>
+
     <string-array name="itens_spiner">
         <item>Nenhum modo selecionado</item>
     </string-array>
