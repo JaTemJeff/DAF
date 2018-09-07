@@ -51,7 +51,6 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class MainActivity extends AppCompatActivity {
 
     Button botaoIniciar;
-    Button botaoParar;
     SeekBar seekbarFrequencia;
     SeekBar seekbarDelay;
     private RxPermissions mPermissions;
@@ -157,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
                             DatabaseHelper conexao = DatabaseHelper.getInstance(MainActivity.this);
                             conexao.getModoDao().create(novoModo);
                             setResult(Activity.RESULT_OK);
-                            //finish();
 
                         } catch (android.database.SQLException e){
                             e.printStackTrace();
@@ -192,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 modoSpiner = (Modo) adapterView.getItemAtPosition(i);
                 seekbarDelay.setMax(0);
-                seekbarDelay.setMax(10);
+                seekbarDelay.setMax(20);
                 seekbarDelay.setProgress(modoSpiner.getDelay_modo());
                 seekbarFrequencia.setMax(0);
                 seekbarFrequencia.setMax(20);
@@ -211,15 +209,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        botaoParar = findViewById(R.id.botao_parar_id);
-        botaoParar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                //playChanged();
-                //reproduz();
-            }
-        });
         mStreamAudioRecorder = StreamAudioRecorder.getInstance();
         mStreamAudioPlayer = StreamAudioPlayer.getInstance();
         mAudioProcessor = new AudioProcessor(BUFFER_SIZE);
@@ -276,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
         if (mIsRecording) {
             stopRecord();
             botaoIniciar.setText(R.string.texto_botao_iniciar_gravacao);
+            //botaoIniciar.setBackgroundResource(R.color.botao_normal);
             mIsRecording = false;
         } else {
             boolean isPermissionsGranted = getRxPermissions().isGranted(WRITE_EXTERNAL_STORAGE)
@@ -376,25 +366,6 @@ public class MainActivity extends AppCompatActivity {
                                             : mAudioProcessor.process(mRatio, mBuffer,
                                     StreamAudioRecorder.DEFAULT_SAMPLE_RATE),
                                     read);
-                        }
-                        inputStream.close();
-                        mStreamAudioPlayer.release();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }, Throwable::printStackTrace);
-    }
-
-    public void play() {
-        Observable.just(mOutputFile)
-                .subscribeOn(Schedulers.io())
-                .subscribe(file -> {
-                    try {
-                        mStreamAudioPlayer.init();
-                        FileInputStream inputStream = new FileInputStream(file);
-                        int read;
-                        while ((read = inputStream.read(mBuffer)) > 0) {
-                            mStreamAudioPlayer.play(mBuffer, read);
                         }
                         inputStream.close();
                         mStreamAudioPlayer.release();

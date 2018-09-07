@@ -16,10 +16,12 @@
         <Button
             android:id="@+id/botao_iniciar_id"
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="64dp"
             android:background="@android:drawable/alert_dark_frame"
             android:backgroundTint="@android:color/holo_green_dark"
@@ -27,75 +29,79 @@
             android:lineSpacingExtra="14sp"
             android:text="@string/texto_botao_iniciar_gravacao"
             android:textColor="@android:color/background_light"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/botao_parar_id"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <SeekBar
             android:id="@+id/seekbar_frequencia_id"
-            style="@android:style/Widget.Material.SeekBar.Discrete"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="50dp"
-            android:backgroundTint="@android:color/holo_green_dark"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/black"
             android:max="20"
             android:progress="10"
-            android:thumb="@android:drawable/checkbox_off_background"
+            android:thumb="@android:drawable/btn_default_small"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textview_frequencia_id"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_frequencia_id" />
 
         <SeekBar
             android:id="@+id/seekbar_delay_id"
-            style="@android:style/Widget.Material.SeekBar.Discrete"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
-            android:backgroundTint="@android:color/holo_green_dark"
-            android:max="10"
-            android:thumb="@android:drawable/checkbox_off_background"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/black"
+            android:max="20"
+            android:progress="10"
+            android:thumb="@android:drawable/btn_default_small"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textview_delay_id"
-            app:layout_constraintTop_toBottomOf="@+id/seekbar_frequencia_id" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_delay_id" />
 
         <TextView
             android:id="@+id/textview_frequencia_id"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="32dp"
             android:text="@string/frequencia"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/seekbar_frequencia_id"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textview_delay_id"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
             android:text="@string/delay"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/seekbar_delay_id"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_frequencia_id" />
+            app:layout_constraintTop_toBottomOf="@+id/seekbar_frequencia_id" />
 
         <TextView
             android:id="@+id/textview_exibe_frequencia_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             app:layout_constraintBottom_toTopOf="@+id/seekbar_frequencia_id"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -103,34 +109,16 @@
             android:id="@+id/textview_exibe_delay_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/seekbar_delay_id"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seekbar_frequencia_id" />
-
-        <Button
-            android:id="@+id/botao_parar_id"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="64dp"
-            android:background="@android:drawable/alert_dark_frame"
-            android:backgroundTint="@android:color/holo_red_dark"
-            android:elevation="24dp"
-            android:text="@string/texto_botao_iniciar_reproducao"
-            android:textColor="@android:color/background_light"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/botao_iniciar_id"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_id" />
+            android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/seekbar_delay_id"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Spinner
             android:id="@+id/spinner_id"
             android:layout_width="0dp"
-            android:layout_height="23dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="16dp"
@@ -139,15 +127,15 @@
             android:backgroundTint="@android:color/darker_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/button_novo_modo_id" />
 
         <Button
             android:id="@+id/button_novo_modo_id"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="50dp"
             android:background="@android:drawable/ic_menu_add"
@@ -161,7 +149,7 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="64dp"
@@ -173,7 +161,7 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="61dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="16dp"
@@ -185,7 +173,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/spinner_id"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/button_novo_modo_id" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

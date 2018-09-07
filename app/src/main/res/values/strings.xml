@@ -10,12 +10,6 @@
     <string name="confirmacao">Confirmação</string>
     <string name="nao">Não</string>
     <string name="preferencias">Configurar Modos</string>
-    <string name="desenvolvedores">Desenvolvedor</string>
-    <string name="jefferson">Jefferson de França Filho - RA: 1429426 - Bacharelado em Engenharia de Software - Universidade Tecnológica Federal do Paraná - UTFPR .</string>
-    <string name="descricao_sobre">Projeto\n\nO aplicativo DAF foi desenvolvido como método de avaliação da disciplina de Programação para Dispositivos Móveis 2 da UTFPR-CP.
-    \n\nO aplicativo permite o cadastro de modos, para a simulação do efeito coro, que acontece quando uma pessoa que possui gagueira fala ou lê ao mesmo tempo que outra pessoa.
-    \n\nÉ permitido a configuração de Delay e Frequência, além da utilização de um headset bluetooth e desativação das notificações.
-    \n\n\n\n Jefferson de França Filho 10/06/2018</string>
     <string name="opcao_menu_preferencias">Modos</string>
     <string name="opcao_menu_sobre">Sobre</string>
     <string name="textView_app">Aplicativo de Auxílio ao Tratamento de Pessoas com Gagueira</string>
@@ -33,15 +27,21 @@
     <string name="falha_modo">Falha ao salvar modo.</string>
     <string name="salvo_sucesso_modo">Novo modo salvo com sucesso.</string>
     <string name="salvo_falha_modo">Modo não foi salvo.</string>
-    <string name="texto_botao_iniciar_gravacao">Iniciar Gravação</string>
-    <string name="texto_botao_iniciar_reproducao">Iniciar Reprodução</string>
-    <string name="texto_botao_parar_gravacao">Parar Gravação</string>
-    <string name="texto_botao_parar_reproducao">Parar Reprodução</string>
+    <string name="texto_botao_iniciar_gravacao">Iniciar</string>
+    <string name="texto_botao_parar_gravacao">Parar</string>
     <string name="texto_add_modo">Adicione um modo</string>
     <string name="texto_modos">Modos:</string>
     <string name="permicao_concedida">Permissão concedida</string>
     <string name="permicao_nao_concedida">Permissão não concedida</string>
-
+    <string name="txt_desenvolvedores">Equipe de desenvolvimento</string>
+    <string name="txt_jeff">Jefferson de França Filho - Bacharelado em Engenharia de Software - Universidade Tecnológica Federal do Paraná - UTFPR - Gerente do projeto e desenvolvedor.</string>
+    <string name="txt_fabricio">Fabrício Martins Lopes - Doutor em Bioinformática (2011) pela Universidade de São Paulo - Professor na Universidade Tecnológica Federal do Paraná - UTFPR - Orientador do projeto.</string>
+    <string name="txt_joao">João Gabriel Salgado - Bacharelado em Engenharia de Software - Universidade Tecnológica Federal do Paraná - UTFPR - Colaborador voluntário.</string>
+    <string name="txt_jose">Jose Ede Campos Neto - Bacharelado em Engenharia de Software - Universidade Tecnológica Federal do Paraná - UTFPR - Colaborador voluntário. .</string>
+    <string name="txt_sobre_protagonismo_estudantil">XD</string>
+    <string name="txt_protagonismo_estudantil">Programa Protagonismo Estudantil</string>
+    <string name="txt_sobre_protagonismo_est">Tem como objetivo selecionar candidatos para bolsas de Protagonismo Estudantil, apoiadas com recursos da UTFPR, através da submissão de um projeto atinente à qualidade da vida acadêmica dos estudantes focando o ingresso, permanência e inserção na sociedade.
+        \n\nO projeto Aplicativo de Auxílio ao Tratamento de Pessoas com Gagueira, foi apresentado e submetido ao EDITAL 013/2017 PROTAGONISMO ESTUDANTIL para o campus Cornélio Procópio, aprovado no segundo semestre de 2017.</string>
     <string-array name="itens_spiner">
         <item>Nenhum modo selecionado</item>
     </string-array>

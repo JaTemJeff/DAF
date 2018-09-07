@@ -46,42 +46,156 @@
             android:id="@+id/textview_desenvolvedores_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/desenvolvedores"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/txt_desenvolvedores"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logo_utfpr_id" />
 
+        <ImageView
+            android:id="@+id/imageView_fabricio_id"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imagem_jeff_id"
+            app:srcCompat="@drawable/fabricio" />
+
         <TextView
-            android:id="@+id/textView_jeff_id"
+            android:id="@+id/textView_fabricio_id"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/txt_fabricio"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView_fabricio_id"
+            app:layout_constraintTop_toBottomOf="@+id/textView_jefferson_id" />
+
+        <ImageView
+            android:id="@+id/imageView_joao_id"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_fabricio_id"
+            app:srcCompat="@drawable/joao" />
+
+        <ImageView
+            android:id="@+id/imageView_joseede_id"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_joao_id"
+            app:srcCompat="@drawable/joseede" />
+
+        <TextView
+            android:id="@+id/textView_joao_id"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/txt_joao"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView_joao_id"
+            app:layout_constraintTop_toBottomOf="@+id/textView_fabricio_id" />
+
+        <TextView
+            android:id="@+id/textView_joseede_id"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/txt_jose"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView_joseede_id"
+            app:layout_constraintTop_toBottomOf="@+id/textView_joao_id" />
+
+        <TextView
+            android:id="@+id/textView_jefferson_id"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@string/jefferson"
-            android:textAlignment="center"
+            android:text="@string/txt_jeff"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imagem_jeff_id"
             app:layout_constraintTop_toBottomOf="@+id/textview_desenvolvedores_id" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textView_protagonismo_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/txt_protagonismo_estudantil"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_joseede_id" />
+
+        <TextView
+            android:id="@+id/textView_sobre_protagonismo_id"
             android:layout_width="0dp"
-            android:layout_height="312dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@string/descricao_sobre"
-            android:textAlignment="center"
+            android:text="@string/txt_sobre_protagonismo_est"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_jeff_id" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_protagonismo_id"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/imageView_prontagonismo_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_sobre_protagonismo_id"
+            app:srcCompat="@drawable/logo_protagonismo_utfpr" />
 
 
     </android.support.constraint.ConstraintLayout>

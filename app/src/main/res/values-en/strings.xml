@@ -33,10 +33,8 @@
     <string name="falha_modo">Failed to save mode.</string>
     <string name="salvo_sucesso_modo">New mode saved successfully.</string>
     <string name="salvo_falha_modo">Mode was not saved.</string>
-    <string name="texto_botao_iniciar_gravacao">Start Recording</string>
-    <string name="texto_botao_iniciar_reproducao">Start Play</string>
-    <string name="texto_botao_parar_gravacao">Stop Recording</string>
-    <string name="texto_botao_parar_reproducao">Stop Play</string>
+    <string name="texto_botao_iniciar_gravacao">Start</string>
+    <string name="texto_botao_parar_gravacao">Stop</string>
     <string name="texto_add_modo">Add a mode</string>
     <string name="texto_modos">Modes:</string>
     <string name="permicao_concedida">Permission granted</string>
