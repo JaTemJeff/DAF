@@ -126,10 +126,12 @@ public class MainActivity extends AppCompatActivity {
         popularListaSpiner();
 
         final EditText nomeModo = new EditText(MainActivity.this);
+
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
         nomeModo.setLayoutParams(lp);
+
 
         botaoNovoModo = findViewById(R.id.button_novo_modo_id);
         botaoNovoModo.setOnClickListener(new View.OnClickListener(){
@@ -139,11 +141,12 @@ public class MainActivity extends AppCompatActivity {
                 confirmaSalvarModorDialog.setTitle(R.string.criar_modo);
                 confirmaSalvarModorDialog.setMessage(R.string.nome_do_modo);
                 nomeModo.setText("");
+
                 if(nomeModo.getParent()!=null)
                     ((ViewGroup)nomeModo.getParent()).removeView(nomeModo); // <- fix
 
                 confirmaSalvarModorDialog.setView(nomeModo);
-                confirmaSalvarModorDialog.setIcon(android.R.drawable.ic_input_add);
+                confirmaSalvarModorDialog.setIcon(R.drawable.ic_add_new_mode);
                 confirmaSalvarModorDialog.setPositiveButton(R.string.salvar_modo, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

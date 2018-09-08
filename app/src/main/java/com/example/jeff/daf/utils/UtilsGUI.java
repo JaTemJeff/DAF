@@ -18,7 +18,7 @@ public class UtilsGUI {
         AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
 
         builder.setTitle(R.string.aviso);
-        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setIcon(R.drawable.ic_atencao);
         builder.setMessage(idTexto);
 
         builder.setNeutralButton(R.string.ok,
@@ -40,7 +40,7 @@ public class UtilsGUI {
         AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
 
         builder.setTitle(R.string.confirmacao);
-        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setIcon(R.drawable.ic_atencao);
         builder.setMessage(mensagem);
 
         builder.setPositiveButton(R.string.sim, listener);
