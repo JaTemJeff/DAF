@@ -70,10 +70,12 @@ public class MainActivity extends AppCompatActivity {
     private File mOutputFile;
     private byte[] mBuffer;
     private boolean mIsRecording = false;
-    private float mRatio = 1;
+    private float mRatio = 0;
     static final int BUFFER_SIZE = 2048;
     Timer timer = new Timer();
-    private long mAtraso = 1;
+    private long mAtraso = 0;
+    private long minimumValueFreq = 5;
+    private long minimumValueDelay = 300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         seekbarDelay.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                mAtraso = (long) i * 100;
+                mAtraso = (long)(  i * 100) + minimumValueDelay;
                 exibeDelay.setText(mAtraso + " Ms");
             }
             @Override
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         seekbarFrequencia.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progresso, boolean b) {
-                mRatio = (float) progresso / 10;
+                mRatio = (float) (progresso+ minimumValueFreq )/ 10;
                 exibeFrequencia.setText(String.valueOf(mRatio+"Mhz"));
             }
             @Override
@@ -196,11 +198,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 modoSpiner = (Modo) adapterView.getItemAtPosition(i);
-                seekbarDelay.setMax(0);
-                seekbarDelay.setMax(20);
+                seekbarDelay.setMax(3);
+                seekbarDelay.setMax(27);
                 seekbarDelay.setProgress(modoSpiner.getDelay_modo());
-                seekbarFrequencia.setMax(0);
-                seekbarFrequencia.setMax(20);
+                seekbarFrequencia.setMax(5);
+                seekbarFrequencia.setMax(25);
                 seekbarFrequencia.setProgress(modoSpiner.getFrequencia_modo());
             }
             @Override
