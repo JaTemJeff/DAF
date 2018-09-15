@@ -1,14 +1,12 @@
 package com.example.jeff.daf;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.SQLException;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,9 +22,7 @@ import com.example.jeff.daf.utils.UtilsGUI;
 
 import java.util.List;
 
-import static android.os.Build.ID;
-
-public class PreferenciasActivity extends AppCompatActivity {
+public class ModosActivity extends AppCompatActivity {
 
     private ListView listViewModo;
     private ArrayAdapter<Modo> listaAdapter;
@@ -40,7 +36,7 @@ public class PreferenciasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preferencias);
+        setContentView(R.layout.activity_modos);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         listViewModo = findViewById(R.id.listview_modo_id);
@@ -48,7 +44,7 @@ public class PreferenciasActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Modo modo = (Modo) adapterView.getItemAtPosition(i);
-                PreferenciasActivity.alterar(PreferenciasActivity.this, REQUEST_ALTERAR_MODO, modo);
+                ModosActivity.alterar(ModosActivity.this, REQUEST_ALTERAR_MODO, modo);
             }
 
         });
@@ -56,15 +52,8 @@ public class PreferenciasActivity extends AppCompatActivity {
         registerForContextMenu(listViewModo);
     }
 
-    public static void alterar(Activity activity, int requestCode, Modo modo){
-        Intent intent = new Intent(activity, PreferenciasActivity.class);
-        intent.putExtra(MODO, ALTERAR);
-        intent.putExtra(ID, modo.getId_modo());
-        activity.startActivityForResult(intent, ALTERAR);
-    }
-
     public static void nova(Activity activity, int requestCode){
-        Intent intent = new Intent(activity, PreferenciasActivity.class);
+        Intent intent = new Intent(activity, ModosActivity.class);
         intent.putExtra(MODO, NOVO);
         activity.startActivityForResult(intent, NOVO);
     }
@@ -88,6 +77,14 @@ public class PreferenciasActivity extends AppCompatActivity {
         listViewModo.setAdapter(listaAdapter);
     }
 
+    public static void alterar(Activity activity, int requestCode, Modo modo){
+        Intent intent = new Intent(activity, ModosActivity.class);
+        intent.putExtra(MODO, ALTERAR);
+        intent.putExtra(ID, modo.getId_modo());
+        activity.startActivityForResult(intent, ALTERAR);
+
+    }
+
     private void excluirModo(final Modo modo){
         String mensagem = getString(R.string.deseja_realmente_apagar)
                 + "\n" + modo.getNome_modo();
@@ -98,7 +95,7 @@ public class PreferenciasActivity extends AppCompatActivity {
                         switch(which){
                             case DialogInterface.BUTTON_POSITIVE:
                                 try {
-                                    DatabaseHelper conexao = DatabaseHelper.getInstance(PreferenciasActivity.this);
+                                    DatabaseHelper conexao = DatabaseHelper.getInstance(ModosActivity.this);
                                     conexao.getModoDao().delete(modo);
                                     listaAdapter.remove(modo);
                                 } catch (SQLException e) {
@@ -129,12 +126,6 @@ public class PreferenciasActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.lista_modos, menu);
-        return true;
-    }
-
-    @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.lista_modos, menu);
@@ -147,7 +138,7 @@ public class PreferenciasActivity extends AppCompatActivity {
         Modo modo = (Modo) listViewModo.getItemAtPosition(info.position);
         switch(item.getItemId()){
             case R.id.menu_item_alterar_id:
-                PreferenciasActivity.alterar(this,
+                ModosActivity.alterar(this,
                         REQUEST_ALTERAR_MODO,
                         modo);
                 return true;

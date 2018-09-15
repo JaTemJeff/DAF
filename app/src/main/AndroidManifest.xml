@@ -17,7 +17,7 @@
         </activity>
         <activity android:name=".SobreActivity"
             android:parentActivityName="com.example.jeff.daf.MainActivity"/>
-        <activity android:name=".PreferenciasActivity"
+        <activity android:name=".ModosActivity"
             android:parentActivityName="com.example.jeff.daf.MainActivity">
 
         </activity>

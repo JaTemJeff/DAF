@@ -4,11 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.SQLException;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -261,8 +258,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.opcao_menu_sobre_id:
                 startActivity(new Intent(MainActivity.this, SobreActivity.class));
                 return true;
+
             case R.id.opcao_menu_preferencias_id:
-                startActivity(new Intent(MainActivity.this, PreferenciasActivity.class));
+                startActivity(new Intent(MainActivity.this, ModosActivity.class));
                 return true;
 
             default:
