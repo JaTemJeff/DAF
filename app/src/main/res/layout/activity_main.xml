@@ -66,7 +66,6 @@
             android:text="@string/frequencia"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,7 +79,6 @@
             android:text="@string/delay"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/seekbar_frequencia_id" />
 
@@ -139,7 +137,6 @@
             android:text="@string/texto_add_modo"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/button_novo_modo_id"
             app:layout_constraintTop_toBottomOf="@+id/seekbar_delay_id" />
 
@@ -153,7 +150,6 @@
             android:text="@string/texto_modos"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -170,7 +166,6 @@
             android:textAllCaps="false"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

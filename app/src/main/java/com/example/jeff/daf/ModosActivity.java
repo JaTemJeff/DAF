@@ -26,9 +26,6 @@ public class ModosActivity extends AppCompatActivity {
 
     private ListView listViewModo;
     private ArrayAdapter<Modo> listaAdapter;
-    public static final String MODO    = "MODO";
-    public static final String ID      = "ID";
-    public static final int    NOVO    = 1;
     public static final int    ALTERAR = 2;
     private static final int REQUEST_NOVO_MODO    = 1;
     private static final int REQUEST_ALTERAR_MODO = 2;
@@ -39,23 +36,17 @@ public class ModosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_modos);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
         listViewModo = findViewById(R.id.listview_modo_id);
         listViewModo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Modo modo = (Modo) adapterView.getItemAtPosition(i);
-                ModosActivity.alterar(ModosActivity.this, REQUEST_ALTERAR_MODO, modo);
             }
 
         });
         popularLista();
         registerForContextMenu(listViewModo);
-    }
-
-    public static void nova(Activity activity, int requestCode){
-        Intent intent = new Intent(activity, ModosActivity.class);
-        intent.putExtra(MODO, NOVO);
-        activity.startActivityForResult(intent, NOVO);
     }
 
     private void popularLista(){
@@ -72,17 +63,9 @@ public class ModosActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         listaAdapter = new ArrayAdapter<Modo>(this,
-                android.R.layout.simple_list_item_1,
+                android.R.layout.simple_selectable_list_item,
                 lista);
         listViewModo.setAdapter(listaAdapter);
-    }
-
-    public static void alterar(Activity activity, int requestCode, Modo modo){
-        Intent intent = new Intent(activity, ModosActivity.class);
-        intent.putExtra(MODO, ALTERAR);
-        intent.putExtra(ID, modo.getId_modo());
-        activity.startActivityForResult(intent, ALTERAR);
-
     }
 
     private void excluirModo(final Modo modo){
@@ -137,11 +120,6 @@ public class ModosActivity extends AppCompatActivity {
         info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Modo modo = (Modo) listViewModo.getItemAtPosition(info.position);
         switch(item.getItemId()){
-            case R.id.menu_item_alterar_id:
-                ModosActivity.alterar(this,
-                        REQUEST_ALTERAR_MODO,
-                        modo);
-                return true;
             case R.id.menu_item_apagar_id:
                 excluirModo(modo);
                 return true;

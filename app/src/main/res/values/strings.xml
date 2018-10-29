@@ -44,6 +44,9 @@
         \n\nO projeto Aplicativo de Auxílio ao Tratamento de Pessoas com Gagueira, foi apresentado e submetido ao EDITAL 013/2017 PROTAGONISMO ESTUDANTIL para o campus Cornélio Procópio, aprovado no segundo semestre de 2017.</string>
     <string name="txt_iniciar">Iniciar</string>
     <string name="txt_parar">Parar</string>
+    <string name="txt_alterar_modo">Alterar Modo</string>
+    <string name="txt_nome_modo">Nome do Modo:</string>
+    <string name="btn_salvar_alteracao">Salvar alterações</string>
 
     <string-array name="itens_spiner">
         <item>Nenhum modo selecionado</item>
