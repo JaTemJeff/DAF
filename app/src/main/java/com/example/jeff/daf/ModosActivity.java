@@ -123,8 +123,6 @@ public class ModosActivity extends AppCompatActivity {
             case R.id.menu_item_apagar_id:
                 excluirModo(modo);
                 return true;
-            case R.id.menu_item_abrir_id:
-                return true;
             default:
                 return super.onContextItemSelected(item);
         }

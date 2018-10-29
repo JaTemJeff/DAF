@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private FileOutputStream mFileOutputStream;
     private File mOutputFile;
     private byte[] mBuffer;
-    private boolean mIsRecording = false;
+    private boolean mIsRecording;
     private float mRatio = 0;
     static final int BUFFER_SIZE = 2048;
     Timer timer = new Timer();
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DatabaseManager.init(this);
+
 
         //Texto de Exibição dos Seekbar's
         seekbarFrequencia = findViewById(R.id.seekbar_frequencia_id);
@@ -271,9 +272,9 @@ public class MainActivity extends AppCompatActivity {
     public void start() {
         if (mIsRecording) {
             stopRecord();
+            mIsRecording = false;
             botaoIniciar.setBackgroundResource(R.drawable.btn_iniciar_iniciar);
             txtIniciar.setText(R.string.txt_iniciar);
-            mIsRecording = false;
         } else {
             boolean isPermissionsGranted = getRxPermissions().isGranted(WRITE_EXTERNAL_STORAGE)
                     && getRxPermissions().isGranted(RECORD_AUDIO);
@@ -291,16 +292,18 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }, Throwable::printStackTrace);
             } else {
-                startRecord();
-                botaoIniciar.setBackgroundResource(R.drawable.btn_iniciar_parar);
-                txtIniciar.setText(R.string.txt_parar);
-                mIsRecording = true;
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        playChanged();
-                    }
-                }, mAtraso);
+                if(mIsRecording == false){
+                    startRecord();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            playChanged();
+                        }
+                    }, mAtraso);
+                    botaoIniciar.setBackgroundResource(R.drawable.btn_iniciar_parar);
+                    txtIniciar.setText(R.string.txt_parar);
+                    mIsRecording = true;
+                }
             }
         }
     }
@@ -323,7 +326,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }
-
                 @Override
                 public void onError() {
                     botaoIniciar.post(() -> {
