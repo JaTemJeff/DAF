@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DAF</string>
+    <string name="app_name">Desgaguejador</string>
     <string name="aviso">Notice</string>
     <string name="iniciar">Start</string>
     <string name="botao_parar">Stop</string>
@@ -10,15 +10,9 @@
     <string name="confirmacao">Confirmation</string>
     <string name="nao">No</string>
     <string name="preferencias">Configure Modes</string>
-    <string name="desenvolvedores">Developer</string>
-    <string name="jefferson">Jefferson de França Filho - RA: 1429426 - Bachelor of Science in Software Engineering - Federal Technological University of Paraná - UTFPR .</string>
-    <string name="descricao_sobre">Project\n\nThe DAF application was developed as a method of evaluation of the discipline of Programming for Mobile Devices 2 of the UTFPR-CP.
-    \n\nThe application allows the register of modes, for the simulation of the chorus effect, which happens when a person who has stuttering speaks or reads at the same time as another person.
-    \n\nDelays and Frequency settings are allowed, as well as the use of a bluetooth headset and the deactivation of notifications.
-    \n\n\n\n Jefferson de França Filho 10/06/2018</string>
     <string name="opcao_menu_preferencias">Modes</string>
     <string name="opcao_menu_sobre">About</string>
-    <string name="textView_app">Treatment Application for People with Stuttering</string>
+    <string name="textView_app">Aplicativo de Auxílio ao Tratamento de Pessoas com Gagueira</string>
     <string name="sim">Yes</string>
     <string name="sim_">Yes</string>
     <string name="deseja_realmente_apagar">Do you really want to delete?</string>
@@ -30,18 +24,37 @@
     <string name="criar_modo">Create new mode</string>
     <string name="salvar_modo">Save</string>
     <string name="cancelar_modo">Cancel</string>
-    <string name="falha_modo">Failed to save mode.</string>
-    <string name="salvo_sucesso_modo">New mode saved successfully.</string>
-    <string name="salvo_falha_modo">Mode was not saved.</string>
+    <string name="falha_modo">Failed to save mode</string>
+    <string name="salvo_sucesso_modo">New saved mode successfully</string>
+    <string name="salvo_falha_modo">Mode not saved</string>
     <string name="texto_botao_iniciar_gravacao">Start</string>
     <string name="texto_botao_parar_gravacao">Stop</string>
     <string name="texto_add_modo">Add a mode</string>
     <string name="texto_modos">Modes:</string>
     <string name="permicao_concedida">Permission granted</string>
     <string name="permicao_nao_concedida">Permission not granted</string>
+    <string name="txt_desenvolvedores">Development team</string>
+    <string name="txt_jeff">Jefferson de França Filho - Bachelor of Software Engineering - Federal Technological University of Paraná - UTFPR -Project manager and developer.</string>
+    <string name="txt_fabricio">Fabrício Martins Lopes - PhD in Bioinformatics (2011) from the University of São Paulo - Professor at the Federal Technological University of Paraná - UTFPR - Project Advisor.</string>
+    <string name="txt_joao">João Gabriel Salgado - Bachelor in Software Engineering - Federal Technological University of Paraná - UTFPR - Volunteer.</string>
+    <string name="txt_jose">Jose Ede Campos Neto - Bachelor in Software Engineering - Federal Technological University of Paraná - UTFPR - Volunteer.</string>
+    <string name="txt_sobre_protagonismo_estudantil">XD</string>
+    <string name="txt_protagonismo_estudantil">Student Protagonism Program</string>
+    <string name="txt_sobre_protagonismo_est">Its objective is to select candidates for scholarship grants, supported by UTFPR resources, through the submission of a project related to the quality of students academic life, focusing on admission, permanence and insertion in society.
+        \n\nThe project Aids for the Treatment of Persons with Stuttering was submitted and submitted to EDITAL 013/2017 STUDENT PROTAGONISM for the Cornélio Procópio campus, approved in the second half of 2017</string>
+    <string name="txt_iniciar">Start</string>
+    <string name="txt_parar">Stop</string>
+    <string name="txt_alterar_modo">Update Mode</string>
+    <string name="txt_nome_modo">Name of Mode:</string>
+    <string name="btn_salvar_alteracao">Save editions</string>
+    <string name="msg_inicial_bem_vindo">Welcome to the Desgaguejador!</string>
+    <string name="msg_inicial_configs">You can set the delay and frequency according to your preferences!</string>
+    <string name="msg_inicial_modo">You can add a mode by saving the delay and frequency preferences that you set in the above seekbar's!</string>
+    <string name="msg_inicial_sobre">For more information, go to the About tab.</string>
+    <string name="msg_fone_de_ouvido">For correct playback of audio, use a headset!</string>
+    <string name="msg_selecione_prefs">To start playback correctly, select the delay and frequency options above! Or one mode!</string>
+    <string name="msg_para_aplicar_atraso_reinicie">To apply the new DELAY preferences, restart playback!</string>
     <string-array name="itens_spiner">
-        <item>None Selected Mode</item>
-        <item>Home Mode</item>
-        <item>Presentation Mode</item>
+        <item>Nenhum modo selecionado</item>
     </string-array>
 </resources>

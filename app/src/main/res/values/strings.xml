@@ -47,6 +47,13 @@
     <string name="txt_alterar_modo">Alterar Modo</string>
     <string name="txt_nome_modo">Nome do Modo:</string>
     <string name="btn_salvar_alteracao">Salvar alterações</string>
+    <string name="msg_inicial_bem_vindo">Bem vindo ao Desgaguejador!</string>
+    <string name="msg_inicial_configs">Você pode configurar o atraso e a frequência de acordo com suas preferências!</string>
+    <string name="msg_inicial_modo">Você pode adicionar um modo salvando as preferências de atraso e frequência que definir nos seekbar's acima!</string>
+    <string name="msg_inicial_sobre">Para mais informações, acesse a aba "Sobre".</string>
+    <string name="msg_fone_de_ouvido">Para o correto funcionamento da reprodução de áudio, utilize um fone de ouvido!</string>
+    <string name="msg_selecione_prefs">Para iniciar a reprodução corretamente, selecione as opções de atraso e frequência acima! Ou um modo!</string>
+    <string name="msg_para_aplicar_atraso_reinicie">"Para aplicar as novas preferências de ATRASO reinicie a reprodução!</string>
 
     <string-array name="itens_spiner">
         <item>Nenhum modo selecionado</item>

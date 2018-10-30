@@ -3,6 +3,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.os.Environment;
@@ -73,6 +74,16 @@ public class MainActivity extends AppCompatActivity {
     private long mAtraso = 0;
     private long minimumValueFreq = 5;
     private long minimumValueDelay = 300;
+    SharedPreferences sPreferencesMsgInicial = null;
+
+    @Override
+    public void onResume () {
+        super.onResume();
+        if (sPreferencesMsgInicial.getBoolean("firstRun", true)) {
+            sPreferencesMsgInicial.edit().putBoolean("firstRun", false).apply();
+            Toast.makeText(getApplicationContext(), R.string.msg_inicial_bem_vindo, Toast.LENGTH_LONG ).show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +91,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         DatabaseManager.init(this);
 
+        //Texto Mensagem primeira vez
+        sPreferencesMsgInicial = getSharedPreferences("firstRun", MODE_PRIVATE);
+
+        //Texto Para utilizar fone de ouvido
+        Toast.makeText(getApplicationContext(), R.string.msg_fone_de_ouvido, Toast.LENGTH_LONG).show();
 
         //Texto de Exibição dos Seekbar's
         seekbarFrequencia = findViewById(R.id.seekbar_frequencia_id);
@@ -92,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 mAtraso = (long)(  i * 100) + minimumValueDelay;
                 exibeDelay.setText(mAtraso + " Ms");
+
+
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -99,7 +117,9 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                if(mIsRecording){
+                    Toast.makeText(getApplicationContext(), R.string.msg_para_aplicar_atraso_reinicie, Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -107,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progresso, boolean b) {
                 mRatio = (float) (progresso+ minimumValueFreq )/ 10;
-                exibeFrequencia.setText(String.valueOf(mRatio+"Mhz"));
+                exibeFrequencia.setText(String.valueOf(mRatio+" Mhz"));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -174,7 +194,6 @@ public class MainActivity extends AppCompatActivity {
 
                         Toast.makeText(MainActivity.this, R.string.salvo_sucesso_modo, Toast.LENGTH_SHORT).show();
                         popularListaSpiner();
-
                     }
                 });
                 confirmaSalvarModorDialog.setNegativeButton(R.string.cancelar_modo, new DialogInterface.OnClickListener() {
@@ -196,10 +215,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 modoSpiner = (Modo) adapterView.getItemAtPosition(i);
-                seekbarDelay.setMax(3);
                 seekbarDelay.setMax(27);
                 seekbarDelay.setProgress(modoSpiner.getDelay_modo());
-                seekbarFrequencia.setMax(5);
                 seekbarFrequencia.setMax(25);
                 seekbarFrequencia.setProgress(modoSpiner.getFrequencia_modo());
             }
@@ -207,12 +224,17 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
+
         txtIniciar = findViewById(R.id.txt_iniciar_id);
         botaoIniciar = findViewById(R.id.botao_iniciar_id);
         botaoIniciar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                start();
+                if(exibeDelay.getText() == "" || exibeFrequencia.getText() == ""){
+                    Toast.makeText(getApplicationContext(), R.string.msg_selecione_prefs, Toast.LENGTH_LONG ).show();
+                }else{
+                    start();
+                }
             }
         });
 
@@ -272,9 +294,9 @@ public class MainActivity extends AppCompatActivity {
     public void start() {
         if (mIsRecording) {
             stopRecord();
-            mIsRecording = false;
             botaoIniciar.setBackgroundResource(R.drawable.btn_iniciar_iniciar);
             txtIniciar.setText(R.string.txt_iniciar);
+            mIsRecording = false;
         } else {
             boolean isPermissionsGranted = getRxPermissions().isGranted(WRITE_EXTERNAL_STORAGE)
                     && getRxPermissions().isGranted(RECORD_AUDIO);
