@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.jeff.daf"
+        applicationId 'com.jeff.daf'
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -20,6 +20,11 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+    lintOptions {
+        checkReleaseBuilds false
+    }
+    productFlavors {
+    }
 }
 
 dependencies {
@@ -31,7 +36,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.j256.ormlite:ormlite-android:4.48'
     implementation 'com.j256.ormlite:ormlite-core:4.48'
-    implementation "commons-io:commons-io:+"
+    implementation 'commons-io:commons-io:+'
     implementation 'com.github.piasy:rxandroidaudio:1.5.3'
     implementation 'com.github.piasy:AudioProcessor:1.5.3'
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
