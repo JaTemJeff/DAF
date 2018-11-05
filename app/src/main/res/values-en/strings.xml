@@ -29,7 +29,7 @@
     <string name="salvo_falha_modo">Mode not saved</string>
     <string name="texto_botao_iniciar_gravacao">Start</string>
     <string name="texto_botao_parar_gravacao">Stop</string>
-    <string name="texto_add_modo">Add a mode</string>
+    <string name="texto_add_modo">Add a new mode</string>
     <string name="texto_modos">Modes:</string>
     <string name="permicao_concedida">Permission granted</string>
     <string name="permicao_nao_concedida">Permission not granted</string>
@@ -49,11 +49,36 @@
     <string name="btn_salvar_alteracao">Save editions</string>
     <string name="msg_inicial_bem_vindo">Welcome to the Desgaguejador!</string>
     <string name="msg_inicial_configs">You can set the delay and frequency according to your preferences!</string>
-    <string name="msg_inicial_modo">You can add a mode by saving the delay and frequency preferences that you set in the above seekbar's!</string>
+    <string name="msg_inicial_modo">You can add a mode by saving the delay and frequency preferences that you set in the above seekbarbs!</string>
     <string name="msg_inicial_sobre">For more information, go to the About tab.</string>
-    <string name="msg_fone_de_ouvido">For correct playback of audio, use a headset!</string>
+    <string name="msg_fone_de_ouvido">Welcome to the Desgaguejador, an Aid to the Treatment of People with Stuttering.
+                                    \n\nYou can simulate the chorus effect according to the delay and frequency settings that best fit your profile.
+                                    \n\nFor correct playback of audio, use a headset!</string>
     <string name="msg_selecione_prefs">To start playback correctly, select the delay and frequency options above! Or one mode!</string>
     <string name="msg_para_aplicar_atraso_reinicie">To apply the new DELAY preferences, restart playback!</string>
+    <string name="modo_inicial_spinner">Initial Mode</string>
+    <string name="tela_sobre_desgaguejador_nome">Desgaguejador</string>
+    <string name="descricao_desgaguejador">The Desgaguejador is an application for mobile devices with Android operating system, whose main objective is the delay of the auditory feedback (DAF), that is, an application that reproduces the voice of the user simultaneously with a small configurable delay, in a different tone also configurable.
+
+                                                \n\nFREQUENCY
+                                                \nFrequency - is a tonality in which your voice will be reproduced:
+                                                \n-Severe voice tone use between 0.5 and 09.
+                                                \n-Acute voice tone use between 1.1 and 2.0..
+                                                \n-Normal voice tone 1.0.
+
+                                                \n\nDELAY
+                                                \nDelay is a time difference between your speech, and an audition of what was said:
+                                                \n-Minimum: 0.25 seconds (250 ms).
+                                                \n-Maximum: 3 seconds (3000 Ms).
+
+                                                \n\nMODE
+                                                \nYou can add a mode by setting the delay and frequency preferences.
+
+                                                \n\nQUESTIONS
+                                                \nQuestions and suggestions contact us by e-mail: jff_94@hotmail.com
+
+
+    </string>
     <string-array name="itens_spiner">
         <item>Nenhum modo selecionado</item>
     </string-array>

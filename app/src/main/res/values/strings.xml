@@ -29,7 +29,7 @@
     <string name="salvo_falha_modo">Modo não foi salvo.</string>
     <string name="texto_botao_iniciar_gravacao">Iniciar</string>
     <string name="texto_botao_parar_gravacao">Parar</string>
-    <string name="texto_add_modo">Adicione um modo</string>
+    <string name="texto_add_modo">Adicione um novo modo</string>
     <string name="texto_modos">Modos:</string>
     <string name="permicao_concedida">Permissão concedida</string>
     <string name="permicao_nao_concedida">Permissão não concedida</string>
@@ -49,12 +49,35 @@
     <string name="btn_salvar_alteracao">Salvar alterações</string>
     <string name="msg_inicial_bem_vindo">Bem vindo ao Desgaguejador!</string>
     <string name="msg_inicial_configs">Você pode configurar o atraso e a frequência de acordo com suas preferências!</string>
-    <string name="msg_inicial_modo">Você pode adicionar um modo salvando as preferências de atraso e frequência que definir nos seekbar's acima!</string>
+    <string name="msg_inicial_modo">Você pode adicionar um modo salvando as preferências de atraso e frequência que definir nos seekbars acima!</string>
     <string name="msg_inicial_sobre">Para mais informações, acesse a aba "Sobre".</string>
-    <string name="msg_fone_de_ouvido">Para o correto funcionamento da reprodução de áudio, utilize um fone de ouvido!</string>
+    <string name="msg_fone_de_ouvido">Bem vindo ao Desgaguejador, um Aplicativo de Auxílio ao Tratamento de Pessoas com Gagueira.
+                                    \n\nVocê pode simular o efeito coro, de acordo com as configurações de atraso e frequência que melhor se adaptarem ao seo perfil.
+                                    \n\nPara o correto funcionamento da reprodução de áudio, utilize um fone de ouvido!</string>
     <string name="msg_selecione_prefs">Para iniciar a reprodução corretamente, selecione as opções de atraso e frequência acima! Ou um modo!</string>
-    <string name="msg_para_aplicar_atraso_reinicie">"Para aplicar as novas preferências de ATRASO reinicie a reprodução!</string>
+    <string name="msg_para_aplicar_atraso_reinicie">Para aplicar as novas preferências de ATRASO reinicie a reprodução!</string>
+    <string name="modo_inicial_spinner">Modo Inicial</string>
+    <string name="tela_sobre_desgaguejador_nome">Desgaguejador</string>
+    <string name="descricao_desgaguejador">O Desgaguejador é um aplicativo para dispositivos móveis com sistema operacional Android, tendo como função principal a retroalimentação auditiva atrasada (RAA), ou seja, um aplicativo que consegue reproduzir a voz do usuário simultaneamente com um pequeno atraso configurável, num tom diferente também configurável.
 
+                                                \n\nFREQUÊNCIA
+                                                \nFrequência - é a tonalidade em que sua voz será reproduzida:
+                                                \n-Tonalidade de voz Grave utilize entre 0.5 e 09.
+                                                \n-Tonalidade de voz Aguda utilize entre 1.1 e 2.0.
+                                                \n-Tonalidede de voz Normal utilize 1.0.
+
+                                                \n\nATRASO
+                                                \nAtraso - é a diferença de tempo entre sua fala, e a audição do que foi dito:
+                                                \n-Mínimo: 0.25 segundos (250 Ms).
+                                                \n-Máximo: 3 segundos (3000 Ms).
+
+                                                \n\nMODO
+                                                \nVocê pode adicionar um modo setando as preferências de atraso e frequência.
+
+                                                \n\nDÚVIDAS
+                                                \nDúvidas e sugestões entre em contato pelo e-mail: jff_94@hotmail.com
+
+    </string>
     <string-array name="itens_spiner">
         <item>Nenhum modo selecionado</item>
     </string-array>

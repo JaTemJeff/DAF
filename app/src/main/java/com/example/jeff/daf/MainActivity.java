@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     Timer timer = new Timer();
     private long mAtraso = 0;
     private long minimumValueFreq = 5;
-    private long minimumValueDelay = 300;
+    private long minimumValueDelay = 250;
     SharedPreferences sPreferencesMsgInicial = null;
 
     @Override
@@ -81,7 +81,22 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if (sPreferencesMsgInicial.getBoolean("firstRun", true)) {
             sPreferencesMsgInicial.edit().putBoolean("firstRun", false).apply();
-            Toast.makeText(getApplicationContext(), R.string.msg_inicial_bem_vindo, Toast.LENGTH_LONG ).show();
+
+            //Cadastra o modo inicial
+            cadastraModoInicial();
+
+            //Texto Para utilizar fone de ouvido
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle(R.string.app_name);
+            builder.setMessage(R.string.msg_fone_de_ouvido);
+            builder.setIcon(R.drawable.web_hi_res_512);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
     }
 
@@ -94,9 +109,6 @@ public class MainActivity extends AppCompatActivity {
         //Texto Mensagem primeira vez
         sPreferencesMsgInicial = getSharedPreferences("firstRun", MODE_PRIVATE);
 
-        //Texto Para utilizar fone de ouvido
-        Toast.makeText(getApplicationContext(), R.string.msg_fone_de_ouvido, Toast.LENGTH_LONG).show();
-
         //Texto de Exibição dos Seekbar's
         seekbarFrequencia = findViewById(R.id.seekbar_frequencia_id);
         seekbarDelay = findViewById(R.id.seekbar_delay_id);
@@ -106,10 +118,8 @@ public class MainActivity extends AppCompatActivity {
         seekbarDelay.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                mAtraso = (long)(  i * 100) + minimumValueDelay;
+                mAtraso = (long)(  i * 50) + minimumValueDelay;
                 exibeDelay.setText(mAtraso + " Ms");
-
-
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -127,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progresso, boolean b) {
                 mRatio = (float) (progresso+ minimumValueFreq )/ 10;
-                exibeFrequencia.setText(String.valueOf(mRatio+" Mhz"));
+                exibeFrequencia.setText(String.valueOf(mRatio+" Hz"));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -215,9 +225,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 modoSpiner = (Modo) adapterView.getItemAtPosition(i);
-                seekbarDelay.setMax(27);
+                seekbarDelay.setMax(55);
                 seekbarDelay.setProgress(modoSpiner.getDelay_modo());
-                seekbarFrequencia.setMax(25);
+                seekbarFrequencia.setMax(15);
                 seekbarFrequencia.setProgress(modoSpiner.getFrequencia_modo());
             }
             @Override
@@ -406,6 +416,26 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }, Throwable::printStackTrace);
+    }
+
+    public void cadastraModoInicial(){
+        final Modo novoModo = new Modo();
+        ModoDAO dao = new ModoDAO(MainActivity.this);
+        novoModo.setNome_modo("Modo Inicial");
+        novoModo.setFrequencia_modo(5);
+        novoModo.setDelay_modo(1);
+
+        try {
+            DatabaseHelper conexao = DatabaseHelper.getInstance(MainActivity.this);
+            conexao.getModoDao().create(novoModo);
+            setResult(Activity.RESULT_OK);
+        } catch (android.database.SQLException e){
+            e.printStackTrace();
+            return;
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+        popularListaSpiner();
     }
 
     private RxPermissions getRxPermissions() {
