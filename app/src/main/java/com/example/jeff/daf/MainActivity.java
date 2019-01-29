@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -32,6 +33,9 @@ import com.example.jeff.daf.utils.UtilsGUI;
 import com.github.piasy.audioprocessor.AudioProcessor;
 import com.github.piasy.rxandroidaudio.StreamAudioPlayer;
 import com.github.piasy.rxandroidaudio.StreamAudioRecorder;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.File;
@@ -74,11 +78,29 @@ public class MainActivity extends AppCompatActivity {
     private long mAtraso = 0;
     private long minimumValueFreq = 5;
     private long minimumValueDelay = 250;
+    private AdView mAdView;
     SharedPreferences sPreferencesMsgInicial = null;
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        if(mIsRecording){
+            botaoIniciar.setBackgroundResource(R.drawable.btn_iniciar_parar);
+            txtIniciar.setText(R.string.txt_parar);
+            mIsRecording = true;
+        }
+    }
 
     @Override
     public void onResume () {
         super.onResume();
+
+        if(mIsRecording){
+            botaoIniciar.setBackgroundResource(R.drawable.btn_iniciar_parar);
+            txtIniciar.setText(R.string.txt_parar);
+            mIsRecording = true;
+        }
+
         if (sPreferencesMsgInicial.getBoolean("firstRun", true)) {
             sPreferencesMsgInicial.edit().putBoolean("firstRun", false).apply();
 
@@ -105,6 +127,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DatabaseManager.init(this);
+
+        //Anuncio
+        MobileAds.initialize(this, "ca-app-pub-4729635888446528~6003563548");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         //Texto Mensagem primeira vez
         sPreferencesMsgInicial = getSharedPreferences("firstRun", MODE_PRIVATE);

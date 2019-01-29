@@ -9,6 +9,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4729635888446528~6003563548"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,8 +19,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".SobreActivity"
-            android:parentActivityName="com.example.jeff.daf.MainActivity"/>
+            android:parentActivityName="com.example.jeff.daf.MainActivity"
+            android:theme="@style/AppTheme2"/>
         <activity android:name=".ModosActivity"
-            android:parentActivityName="com.example.jeff.daf.MainActivity"/>
+            android:parentActivityName="com.example.jeff.daf.MainActivity"
+            android:theme="@style/AppTheme2" />
     </application>
 </manifest>

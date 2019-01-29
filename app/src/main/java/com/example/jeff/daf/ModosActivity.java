@@ -1,5 +1,6 @@
 package com.example.jeff.daf;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +18,9 @@ import android.widget.ListView;
 import com.example.jeff.daf.modelo.Modo;
 import com.example.jeff.daf.persistencia.DatabaseHelper;
 import com.example.jeff.daf.utils.UtilsGUI;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.List;
 
@@ -27,11 +31,18 @@ public class ModosActivity extends AppCompatActivity {
     public static final int    ALTERAR = 2;
     private static final int REQUEST_NOVO_MODO    = 1;
     private static final int REQUEST_ALTERAR_MODO = 2;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modos);
+
+        //Anuncio
+        MobileAds.initialize(this, "ca-app-pub-4729635888446528~6003563548");
+        mAdView = findViewById(R.id.adView2);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         listViewModo = findViewById(R.id.listview_modo_id);
         listViewModo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
