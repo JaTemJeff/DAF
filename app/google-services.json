@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "674452356003",
+    "firebase_url": "https://desgaguejador.firebaseio.com",
+    "project_id": "desgaguejador",
+    "storage_bucket": "desgaguejador.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674452356003:android:34f25216bf9bf2d1",
+        "android_client_info": {
+          "package_name": "com.jeff.daf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "674452356003-rokk4okdd01632mv010bmo5jlmpc8gnb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jeff.daf",
+            "certificate_hash": "ead33eac3f475a51f7e0b462b0c88835a8059198"
+          }
+        },
+        {
+          "client_id": "674452356003-hndji5ihdvvqg9qvvodjv9c424n5hi7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsCQa8yGRSDXr-btPU12kphwOzRV8ejA8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "674452356003-hndji5ihdvvqg9qvvodjv9c424n5hi7v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-4729635888446528~6003563548"
+    }
+  ],
+  "configuration_version": "1"
+}

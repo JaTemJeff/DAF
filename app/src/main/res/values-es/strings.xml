@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name"></string>
+    <string name="aviso">Advertencia</string>
+    <string name="iniciar">Comienzo</string>
+    <string name="botao_parar">Detener</string>
+    <string name="frequencia">Frecuencia</string>
+    <string name="delay">Retraso</string>
+    <string name="ok">OK</string>
+    <string name="confirmacao">Confirmación</string>
+    <string name="nao">No</string>
+    <string name="preferencias">Configurar Modos</string>
+    <string name="opcao_menu_preferencias">Modos</string>
+    <string name="opcao_menu_sobre">Acerca de</string>
+    <string name="textView_app">Aplicación de Ayuda al tratamiento de personas con tartamudez</string>
+    <string name="sim">Sí</string>
+    <string name="sim_">Sí</string>
+    <string name="deseja_realmente_apagar">¿Desea realmente borrar?</string>
+    <string name="menu_apagar">Borrar</string>
+    <string name="menu_abrir">Abierto</string>
+    <string name="nome_vazio">¡El nombre del modo está vacío!</string>
+    <string name="menu_item_alterar">Cambio</string>
+    <string name="nome_do_modo">Introduzca el nombre del modo:</string>
+    <string name="criar_modo">Crear nuevo modo</string>
+    <string name="salvar_modo">Guardar</string>
+    <string name="cancelar_modo">Cancelar</string>
+    <string name="falha_modo">Error al guardar modo.</string>
+    <string name="salvo_sucesso_modo">Nuevo modo salvo con éxito.</string>
+    <string name="salvo_falha_modo">El modo no se guardó.</string>
+    <string name="texto_botao_iniciar_gravacao">Comienzo</string>
+    <string name="texto_botao_parar_gravacao">Detener</string>
+    <string name="texto_add_modo">Agregar un nuevo modo</string>
+    <string name="texto_modos">Modos:</string>
+    <string name="permicao_concedida">Permiso concedido</string>
+    <string name="permicao_nao_concedida">Permiso no concedido</string>
+    <string name="txt_desenvolvedores">Equipo de desarrollo</string>
+    <string name="txt_jeff">Jefferson de França Filho - Licenciado en Ingeniería de Software - Universidad Tecnológica Federal de Paraná - UTFPR - Gerente del proyecto y desarrollador.</string>
+    <string name="txt_fabricio">Fabrício Martins Lopes - Doctorado en Bioinformática (2011) de la Universidad de Sao Paulo - Profesor de la Universidad Tecnológica Federal de Paraná - Asesor de Proyectos - UTFPR.</string>
+    <string name="txt_joao">João Gabriel Salgado - Licenciatura en Ingeniería de Software - Universidad Tecnológica Federal de Paraná - UTFPR - Colaborador voluntario.</string>
+    <string name="txt_jose">Jose Ede Campos Neto - Licenciatura en Ingeniería de Software - Universidad Tecnológica Federal de Paraná - UTFPR - Colaborador voluntario.</string>
+    <string name="txt_sobre_protagonismo_estudantil">XD</string>
+    <string name="txt_protagonismo_estudantil">Programa Protagonismo Estudiantil</string>
+    <string name="txt_sobre_protagonismo_est">El objetivo es seleccionar candidatos para becas de Protagonismo Estudiantil, apoyadas con recursos de la UTFPR, a través de la presentación de un proyecto en relación con la calidad de la vida académica de los estudiantes enfocando el ingreso, permanencia e inserción en la sociedad.
+        \n\nEl proyecto Aplicación de Ayuda al Tratamiento de Personas con tartamudez fue presentado y sometido al EDITAL 013/2017 PROTAGONISMO ESTUDIANTIL para el campus Cornelio Procopio, aprobado en el segundo semestre de 2017.</string>
+    <string name="txt_iniciar">Comienzo</string>
+    <string name="txt_parar">Detener</string>
+    <string name="txt_alterar_modo">Cambiar el modo</string>
+    <string name="txt_nome_modo">Nombre del modo:</string>
+    <string name="btn_salvar_alteracao">Guardar cambios</string>
+    <string name="msg_inicial_bem_vindo">¡Bienvenido al Desgaguejador!</string>
+    <string name="msg_inicial_configs">Usted puede configurar el retraso y la frecuencia de acuerdo a sus preferencias!</string>
+    <string name="msg_inicial_modo">Puede añadir un modo guardando las preferencias de retraso y frecuencia que se establezca en los seekbars anteriores!</string>
+    <string name="msg_inicial_sobre">Para más información, acceda a la pestaña "Acerca de".</string>
+    <string name="msg_fone_de_ouvido">Bienvenido al Desgaguejador, una Aplicación de Ayuda al Tratamiento de Personas con tartamudez.
+                                    \n\nUsted puede simular el efecto coro, de acuerdo con las configuraciones de retardo y frecuencia que mejor se adapten al perfil.
+                                    \n\nPara el correcto funcionamiento de la reproducción de audio, utilice un auricular!</string>
+    <string name="msg_selecione_prefs">Para iniciar la reproducción correctamente, seleccione las opciones de retraso y frecuencia arriba! ¡O un modo!</string>
+    <string name="msg_para_aplicar_atraso_reinicie">Para aplicar las nuevas preferencias de ATRASO, reinicie la reproducción.</string>
+    <string name="modo_inicial_spinner">Modo de inicio</string>
+    <string name="tela_sobre_desgaguejador_nome">Desgaguejador</string>
+    <string name="descricao_desgaguejador">O Desgaguejador es una aplicación para dispositivos móviles con sistema operativo Android, teniendo como función principal la retroalimentación auditiva atrasada (RAA), es decir, una aplicación que puede reproducir la voz del usuario simultáneamente con un pequeño retraso configurable, en un tono diferente también configurable.
+
+                                                \n\nFRECUENCIA
+                                                \nFrecuencia - es la tonalidad en la que se reproducirá su voz:
+                                                \n-Tono de voz Grabe utilice entre 0,5 y 09.
+                                                \n-Tonalidad de voz Aguda utiliza entre 1.1 y 2.0.
+                                                \n-Tono de voz Normal utilice 1.0.
+
+                                                \n\nRETRASO
+                                                \nRetraso - es la diferencia de tiempo entre su habla, y la audición de lo que se ha dicho:
+                                                \n-Mínimo: 0.25 segundos (250 ms).
+                                                \n-Máximo: 3 segundos (3000 ms).
+
+                                                \n\nMODO
+                                                \nPuede agregar un modo estableciendo las preferencias de retraso y frecuencia.
+
+                                                \n\nDUDAS
+                                                \nDudas y sugerencias entre en contacto por e-mail: jff_94@hotmail.com
+    </string>
+    <string-array name="itens_spiner">
+        <item>Ningún modo seleccionado</item>
+    </string-array>
+</resources>
