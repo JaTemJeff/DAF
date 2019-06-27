@@ -38,12 +38,6 @@ public class ModosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modos);
 
-        //Anuncio
-        MobileAds.initialize(this, "ca-app-pub-4729635888446528~6003563548");
-        mAdView = findViewById(R.id.adView2);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
         listViewModo = findViewById(R.id.listview_modo_id);
         listViewModo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

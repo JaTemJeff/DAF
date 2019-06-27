@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -36,6 +37,7 @@ import com.github.piasy.rxandroidaudio.StreamAudioRecorder;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.tasks.Task;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.File;
@@ -45,6 +47,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -74,12 +79,12 @@ public class MainActivity extends AppCompatActivity {
     private boolean mIsRecording;
     private float mRatio = 0;
     static final int BUFFER_SIZE = 2048;
-    Timer timer = new Timer();
     private long mAtraso = 0;
     private long minimumValueFreq = 5;
-    private long minimumValueDelay = 250;
+    private long minimumValueDelay = 200;
     private AdView mAdView;
     SharedPreferences sPreferencesMsgInicial = null;
+    Handler handler = new Handler();
 
     @Override
     public void onStart(){
@@ -127,12 +132,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DatabaseManager.init(this);
-
-        //Anuncio
-        MobileAds.initialize(this, "ca-app-pub-4729635888446528~6003563548");
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
         //Texto Mensagem primeira vez
         sPreferencesMsgInicial = getSharedPreferences("firstRun", MODE_PRIVATE);
@@ -354,12 +353,22 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 if(mIsRecording == false){
                     startRecord();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            playChanged();
+                        }
+                    }, mAtraso);
+
+                    /*
                     timer.schedule(new TimerTask() {
                         @Override
                         public void run() {
                             playChanged();
                         }
                     }, mAtraso);
+                    */
+
                     botaoIniciar.setBackgroundResource(R.drawable.btn_iniciar_parar);
                     txtIniciar.setText(R.string.txt_parar);
                     mIsRecording = true;
